@@ -119,7 +119,7 @@ classdef Vibot1
                     disp(low_suit)
                     for i = low_suit
                     card_viability = card_viability + ...
-                        (suit == i) /min(suit_count);
+                        (suit == i) /min(suit_count)/2;
                     end
                     disp(card_viability);
                     %%%Leading-specific viability    
@@ -147,15 +147,17 @@ classdef Vibot1
                         disp(card_viability);
                         disp('Trumping card')
                         % Favour low cards if cannot go higher
-                        card_viability = card_viability + (nums<max(played_cardvalues))./nums;
+                        card_viability = card_viability + (suit==leading_suit & nums<max(played_cardvalues))./nums;
+                        disp(card_viability);
                         % Favour trumps, low number, when out of leading suit
-                        max_trump_played = max(played_cardvalues(played_cardsuits == tb.trump_suit));
+                        max_trump_played = mod(max(played_cardvalues(played_cardsuits == tb.trump_suit)),100);
                         if isempty(max_trump_played)
                             max_trump_played=1;
                         end
                         disp('max Trump card number:')
                         disp(max_trump_played);
-                        card_viability = card_viability + (suit==tb.trump_suit & nums>max_trump_played )./nums *2;
+                        card_viability = card_viability + (suit==tb.trump_suit & nums>max_trump_played )./nums *2.5;
+                        card_viability = card_viability - (suit==tb.trump_suit & nums<max_trump_played ).*nums/5;
                         disp(card_viability);
                     end
                     %%%Partner-specific viability

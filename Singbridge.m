@@ -20,7 +20,7 @@ background_colour=[0 0.2 0];
 text_colour=[1 0.713725 0.756863];
 role_text_colour=[0.12549 0.698039 0.666667];
 font_size=0.5;
-see_all_deck = 1;
+see_all_deck = 0;
 
 % Construct the window
 win = figure('ToolBar','none','Name','Floating Bridge',...
@@ -45,8 +45,8 @@ set(disp_axes,'Xlim',[0 playfield_size(1)],'Ylim',[0 playfield_size(2)],...
 % Initialise players
 % Can choose 'Human' or 'randomAI' or 'Vibot1'
 pl(1) = Player('Human',1,[]);
-pl(2) = Player('randomAI',2,[]);
-pl(3) = Player('randomAI',3,[]);
+pl(2) = Player('Vibot1',2,[]);
+pl(3) = Player('Vibot1',3,[]);
 pl(4) = Player('Vibot1',4,[]);
 
 % Draw textboxes to display player name, score,role and message
